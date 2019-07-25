@@ -1,0 +1,78 @@
+<!-- <h3>Cart Info</h3>
+<table border="1">
+    <tr>
+        <th>Option</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Photo</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+    </tr>
+    <tr *ngFor="let item of items">
+        <td align="center">
+            <a (click)="remove(item.product.id)">X</a>
+        </td>
+        <td>{{item.product.id}}</td>
+        <td>{{item.product.name}}</td>
+        <td>
+            <img [src]="item.product.photo" width="50">
+        </td>
+        <td>{{item.product.price}}</td>
+        <td>{{item.quantity}}</td>
+        <td>{{item.product.price * item.quantity}}</td>
+    </tr>
+    <tr>
+        <td colspan="6" align="right">Total</td>
+        <td>{{total}}</td>
+    </tr>
+</table> -->
+
+
+<div>
+  <div class="shopping-cart">
+
+    <div class="row">
+      <div class="col-6">
+        <h1 class="title">shopping cart</h1>
+      </div>
+    </div>
+
+    <div class="item" *ngFor="let item of items ; let i = index ">
+
+      <div class="buttons" title="xóa sản phẩm" (click)="remove(item.product.id)">
+        <i class='fas fa-trash' style='font-size:36px'></i>
+      </div>
+
+      <div class="image">
+        <img width="100px" height="100px" [src]="item.product.photo" alt="{{item.product.name}}" />
+      </div>
+
+      <div class="description">
+        <span>{{item.product.name}}</span>
+        <span>{{item.product.price|currency:"USD":"symbol"}}</span>
+      </div>
+
+      <div class="quantity">
+        <button class="plus-btnstyle" type="button" name="button" (click)="plusItem(i)">
+          <img src="https://designmodo.com/demo/shopping-cart/plus.svg" alt="" />
+        </button>
+        <input type="text" name="name" value="{{item.quantity}}">
+        <button class="minus-btnstyle" type="button" name="button" (click)="minusItem(i)">
+          <img src="https://designmodo.com/demo/shopping-cart/minus.svg" alt="" />
+        </button>
+      </div>
+
+      <div class="total-price">{{item.product.price * item.quantity |currency:"USD":"symbol"}}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <h1>Total : {{total | currency:"USD":"symbol"}}</h1>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-warning" routerLink="/products">
+        continue buying</button>
+    </div>
+  </div>
+</div>

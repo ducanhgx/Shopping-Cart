@@ -1,0 +1,140 @@
+<div class="container my-5">
+  <div class="container">
+    <!-- <h1 class="text-center">{{showFormEditAdd ? 'Thêm Sinh Viên' : 'Sửa Sinh Viên '}}</h1>
+    <form>
+      <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">Họ Và Tên</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  [(ngModel)]="student.name" name="name" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">Ngày Sinh</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control"  [ngModel]="student.birthday | date:'yyyy-MM-dd'"
+            name="birthday" (ngModelChange)="birthday = $event" [value]="student.birthday | date:'yyyy-MM-dd'" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">Điểm</label>
+        <div class="col-sm-10">
+          <input type="number" min='0' max='10' class="form-control"  [(ngModel)]="student.mark" name="mark">
+        </div>
+      </div>
+      <button type="submit" *ngIf="showFormEditAdd" (click)="addStudent()"
+        [disabled]=" !(student.name && student.birthday && student.mark)"
+        class="btn btn-primary btn-block">Thêm</button>
+      <div *ngIf="!showFormEditAdd" class="row">
+        <button (click)="saveEditStudent(student.id)" [disabled]=" !(student.name && student.birthday && student.mark)"
+          class="btn btn-primary  btn-block">Lưu</button>
+        <button (click)="backEdit()" class="btn btn-danger  btn-block">Hủy</button>
+      </div>
+    </form>
+    <div>
+      {{students | json}}
+    </div>
+  </div> -->
+
+    <!-- <form #addEditFormStudent='ngForm' (ngSubmit)="addEditFormStudent.valid && onSubmitngForm(addEditFormStudent)">
+      <div class="form-group row">
+        <label for="fullName" class="col-sm-2 col-form-label">Họ Và Tên</label>
+        <div class="col-sm-10">
+          <input type="text" name="fullname" #fullname="ngModel" [(ngModel)]="student.name" required maxlength="100" minlength="6" class="form-control" id="fullName" placeholder="Họ Và Tên" >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="birthdayDate" class="col-sm-2 col-form-label">Ngày Sinh</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="birthdayDate" name="birthdayDate"
+          [ngModel]="student.birthday | date:'yyyy-MM-dd'" (ngModelChange)="birthday = $event"
+          [value]="student.birthday | date:'yyyy-MM-dd'" #birthdayDate="ngModel" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="_mark" class="col-sm-2 col-form-label">Điểm</label>
+        <div class="col-sm-10">
+          <input type="text" name="mark" #mark="ngModel" [(ngModel)]="student.mark" required  minlength="0" maxlength="10" class="form-control" id="_mark" placeholder="Điểm" >
+        </div>
+      </div>
+          <button type="submit" [disabled] ="!addEditFormStudent.valid" class="btn btn-success btn-block col-12">Save</button>
+    </form> -->
+
+    <h1 class="text-center">{{showFormEditAdd ? 'Thêm Sinh viên' :'Sửa Thông tin Sinh viên'}}</h1>
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="rfStudent" class="row justify-content-md-center">
+      <div class="col-md-8">
+        <div class="form-group row">
+          <label for="example-text-input" class="col-2 col-form-label">
+            Họ Và Tên :
+          </label>
+          <div class="col-10">
+            <input class="form-control" type="text" id="example-text-input" formControlName="name">
+            <div
+              *ngIf="rfStudent.controls['name'].invalid && (rfStudent.controls['name'].dirty || rfStudent.controls['name'].touched)"
+              class="text-danger">
+              <small *ngIf="rfStudent.controls['name'].errors.required"> Bạn chưa nhập họ và tên </small>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="example-email-input" class="col-2 col-form-label">
+            Ngày Sinh :
+          </label>
+          <div class="col-10">
+            <input class="form-control" type="date" id="example-email-input" formControlName="birthday">
+            <div
+              *ngIf="rfStudent.controls['birthday'].invalid && (rfStudent.controls['birthday'].dirty || rfStudent.controls['name'].touched)"
+              class="text-danger">
+              <small *ngIf="rfStudent.controls['birthday'].errors.required">Bạn chưa nhập ngày sinh</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="example-tel-input" class="col-2 col-form-label">
+            Điểm :
+          </label>
+          <div class="col-10">
+            <input class="form-control" type="number" id="example-tel-input" formControlName="mark">
+            <div
+              *ngIf="rfStudent.controls['mark'].invalid && (rfStudent.controls['mark'].dirty || rfStudent.controls['mark'].touched)"
+              class="text-danger">
+              <small *ngIf="rfStudent.controls['mark'].errors.required">Bạn chưa nhập điểm</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-10 offset-2" *ngIf="showFormEditAdd">
+            <input class="btn btn-primary" type="submit" value="Thêm" />
+          </div>
+          <div class="col-10 offset-2" *ngIf="!showFormEditAdd">
+            <button class="btn btn-primary" type="submit">Lưu</button>
+            <button class="btn btn-danger ml-2" type="button" (click)="backEdit()">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Họ Và Tên</th>
+          <th scope="col">Ngày Sinh</th>
+          <th scope="col">Điểm</th>
+          <th scope="col">Xếp Loại</th>
+          <th *ngIf="showFormEditAdd" scope="col"> Action </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students ">
+          <th scope="row">{{student.id}}</th>
+          <td>{{student.name}}</td>
+          <td>{{student.birthday | date:'dd-MM-yyyy'}}</td>
+          <td>{{student.mark}}</td>
+          <td>{{gradeStudent(student)}}</td>
+          <td *ngIf="showFormEditAdd"><button class="btn btn-primary"
+              (click)="showEditStudent(student)">Sửa</button><button class="btn btn-danger ml-2"
+              (click)="deteleStudent(student.id)">Xóa</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

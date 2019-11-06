@@ -1,4 +1,8 @@
-# MyAppAngular
+# Demo
+
+https://ducanhgx.github.io/shopping_cart/
+
+# Shopping-cart
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
 
